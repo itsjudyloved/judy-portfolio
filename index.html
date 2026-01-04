@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link rel="icon" href="logos/solo.png" type="image/png">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+        <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                    <a href="index.html">
+                        <img src="logos/logo.png" class="logo-img">
+                    </a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="portfolio.html" class="nav-link">Portfolio</a></li>
+                <li><a href="skills.html" class="nav-link">Skills</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title gradient-text">Judy Lou Cortes</h1>
+            <p class="hero-tagline">Creative by heart, learning as I build.</p>
+            <div class="hero-buttons">
+                <a href="about.html" class="btn btn-primary">Get to Know Me</a>
+            </div>
+        </div>
+        <div class="hero-decoration">
+            <div class="floating-shape shape-1"></div>
+            <div class="floating-shape shape-2"></div>
+            <div class="floating-shape shape-3"></div>
+            <div class="floating-shape shape-4"></div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <p class="section-subtitle">Let's collaborate on your next project</p>
+
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">📧</div>
+                        <div class="contact-details">
+                            <h3>Email</h3>
+                            <a href="mailto:judyloucortes@gmail.com">judyloucortes@gmail.com</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">💼</div>
+                        <div class="contact-details">
+                            <h3>LinkedIn</h3>
+                            <a href="https://www.linkedin.com/in/judyloved/"
+                                target="_blank">https://www.linkedin.com/in/judyloved/</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📱</div>
+                        <div class="contact-details">
+                            <h3>Social Media</h3>
+                            <div class="social-links">
+                                <a href="https://www.instagram.com/judyloved/" target="_blank"
+                                    class="social-link">Instagram</a>
+                                <a href="https://x.com/judyloved" target="_blank" class="social-link">X</a>
+                                <a href="https://github.com/itsjudyloved" target="_blank" class="social-link">GitHub</a>
+                                <a href="https://www.tiktok.com/@judylovedygg" target="_blank"
+                                    class="social-link">TikTok</a>
+                                <a href="https://www.youtube.com/@judyloved" target="_blank"
+                                    class="social-link">YouTube</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- EmailJS-powered contact form (replaces previous static form) -->
+                <form id="contact-form-emailjs" class="contact-form contact-form--emailjs" novalidate>
+                    <div class="form-group">
+                        <input id="cj-name" name="from_name" type="text" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input id="cj-email" name="from_email" type="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="cj-message" name="message" rows="5" placeholder="Your Message" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button id="cj-send" type="submit" class="btn btn-primary">Send Message</button>
+                    </div>
+                    <div id="cj-feedback" class="cj-feedback" aria-live="polite" style="margin-top:8px; font-weight:600;"></div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Judy Lou Cortes. All rights reserved. | Designed with 💜</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <!-- EmailJS SDK and form handler -->
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script>
+        (function(){
+            if (typeof emailjs !== 'undefined') {
+                emailjs.init('oy12SfYxcrp5RoRpP');
+            } else {
+                console.warn('EmailJS SDK not loaded');
+            }
+
+            const form = document.getElementById('contact-form-emailjs');
+            const sendBtn = document.getElementById('cj-send');
+            const feedback = document.getElementById('cj-feedback');
+            let sending = false;
+
+            function showFeedback(type, text) {
+                feedback.className = 'cj-feedback ' + (type === 'success' ? 'cj-success' : 'cj-error');
+                feedback.textContent = text;
+            }
+
+            function validate() {
+                const name = document.getElementById('cj-name').value.trim();
+                const email = document.getElementById('cj-email').value.trim();
+                const msg = document.getElementById('cj-message').value.trim();
+                if (!name || !email || !msg) return false;
+                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return re.test(email);
+            }
+
+            if (form) {
+                form.addEventListener('submit', function(e){
+                    e.preventDefault();
+                    if (sending) return;
+                    feedback.className = 'cj-feedback'; feedback.textContent = '';
+                    if (!validate()) { showFeedback('error', 'Please complete all fields with a valid email.'); return; }
+
+                    const name = document.getElementById('cj-name').value.trim();
+                    const email = document.getElementById('cj-email').value.trim();
+                    const message = document.getElementById('cj-message').value.trim();
+
+                    sending = true; sendBtn.disabled = true; const oldText = sendBtn.textContent; sendBtn.textContent = 'Sending...';
+
+                    const templateParams = {
+                        from_name: name,
+                        from_email: email,
+                        message: message,
+                        to_email: 'judyloucortes@gmail.com'
+                    };
+
+                    emailjs.send('judyloved', 'template_m0z4b88', templateParams)
+                        .then(function(response){
+                            showFeedback('success', 'Message sent successfully, Judy! ✅');
+                            form.reset();
+                        }, function(err){
+                            console.error('EmailJS error', err);
+                            showFeedback('error', 'Failed to send message. Please try again later.');
+                        })
+                        .finally(function(){ sending = false; sendBtn.disabled = false; sendBtn.textContent = oldText; });
+                });
+
+                // Clear feedback on input
+                ['cj-name','cj-email','cj-message'].forEach(id => {
+                    const el = document.getElementById(id);
+                    if (!el) return; el.addEventListener('input', () => { feedback.className = 'cj-feedback'; feedback.textContent = ''; });
+                });
+            }
+        })();
+    </script>
+</body>
+
+</html>

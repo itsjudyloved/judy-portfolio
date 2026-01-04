@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Night UGC</title>
+    <link rel="icon" href="logos/solo.png" type="image/png">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Content Creation Feed Styles */
+        .content-creation-page {
+            min-height: 100vh;
+            background: linear-gradient(180deg, var(--off-white) 0%, var(--white) 100%);
+            padding-top: 100px;
+        }
+
+        .page-header {
+            text-align: center;
+            padding: 3rem 20px 2rem;
+            background: var(--white);
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--purple-primary);
+            text-decoration: none;
+            font-weight: 500;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            color: var(--purple-dark);
+            transform: translateX(-5px);
+        }
+
+        .feed-container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 2rem 20px;
+            overflow-x: auto;
+        }
+
+        .video-feed {
+            display: flex;
+            flex-direction: row;
+            gap: 2rem;
+            overflow-x: auto;
+            padding-bottom: 1rem;
+        }
+
+        .video-feed::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .video-feed::-webkit-scrollbar-track {
+            background: var(--purple-lighter);
+            border-radius: 10px;
+        }
+
+        .video-feed::-webkit-scrollbar-thumb {
+            background: var(--purple-primary);
+            border-radius: 10px;
+        }
+
+        .video-feed::-webkit-scrollbar-thumb:hover {
+            background: var(--purple-dark);
+        }
+
+        .video-card {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 25px var(--shadow-light);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            flex: 0 0 600px;
+            min-width: 600px;
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px var(--shadow-heavy);
+        }
+
+        .video-preview {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 landscape aspect ratio */
+            background: linear-gradient(135deg, var(--purple-light), var(--purple-lighter));
+            overflow: hidden;
+        }
+
+        .video-preview iframe {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transform: translateY(-50%);
+            border: none;
+        }
+
+        .video-preview img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-preview video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .play-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .play-overlay::before {
+            content: '';
+            width: 0;
+            height: 0;
+            border-left: 18px solid var(--purple-primary);
+            border-top: 12px solid transparent;
+            border-bottom: 12px solid transparent;
+            margin-left: 4px;
+        }
+
+        .video-card:hover .play-overlay {
+            opacity: 0;
+        }
+
+        .video-info {
+            padding: 1.5rem;
+        }
+
+        .video-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--purple-darker);
+            margin-bottom: 0.5rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .video-description {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .video-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .video-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .facebook-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--purple-lighter);
+            color: var(--purple-primary);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-top: 0.5rem;
+        }
+
+        .placeholder-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--purple-darker);
+        }
+
+        .placeholder-video-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .placeholder-video-text {
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .feed-container {
+                padding: 1rem 15px;
+            }
+
+            .video-card {
+                flex: 0 0 350px;
+                min-width: 350px;
+            }
+
+            .play-overlay {
+                width: 60px;
+                height: 60px;
+            }
+
+            .play-overlay::before {
+                border-left: 18px solid var(--purple-primary);
+                border-top: 12px solid transparent;
+                border-bottom: 12px solid transparent;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo"><a href="index.html" style="text-decoration: none; color: inherit;">Judy Lou Cortes</a></div>
+            <ul class="nav-menu">
+                <li><a href="index.html#home" class="nav-link">Home</a></li>
+                <li><a href="index.html#about" class="nav-link">About</a></li>
+                <li><a href="index.html#portfolio" class="nav-link">Portfolio</a></li>
+                <li><a href="index.html#skills" class="nav-link">Skills</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Content Creation Page -->
+    <section class="content-creation-page">
+        <div class="page-header">
+            <a href="portfolio.html#content" class="back-button">
+                <span>←</span> Back to Content Creation
+            </a>
+            <h1 class="section-title">Game Night UGC</h1>
+            <p class="section-subtitle">A collection of user-generated game night content from various games, hosted by international gaming guilds</p>
+        </div>
+
+        <div class="feed-container">
+            <div class="video-feed">
+                <!-- Video Card 1 -->
+                <div class="video-card">
+                    <div class="video-preview">
+                        <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1085797023424061&show_text=0&width=500" allow="encrypted-media" allowfullscreen></iframe>
+                        <div class="play-overlay"></div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Sipher Odyssey</h3>
+                        <p class="video-description">BACK TO SIPHER~! Had a blast jumping back into Sipher Odyssey during the @argo_hub Game Night! ⚔️ It's been a while since I last played, and wow—still as fun and intense as ever. Gotta put in more practice to keep up with the community! 💪🔥</p>
+                        <div class="facebook-badge" onclick="window.open('https://www.facebook.com/reel/1085797023424061', '_blank')" style="cursor: pointer;">📘 Watch on Facebook</div>
+                    </div>
+                </div>
+
+                <!-- Video Card 2 -->
+                <div class="video-card">
+                    <div class="video-preview">
+                        <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F4079825652293612&show_text=0&width=500" allow="encrypted-media" allowfullscreen></iframe>
+                        <div class="play-overlay"></div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Forgotten Playland ft. CATS GUILD</h3>
+                        <p class="video-description">Had an amazing time joining the @ForgotPlayland Game Night with @c_cats_guild! 🎮💫 It was such a chill and nostalgic experience — bringing back those carefree vibes while having fun with everyone. Can't wait for the next one! 💖🎉</p>
+                        <div class="facebook-badge" onclick="window.open('https://www.facebook.com/reel/4079825652293612', '_blank')" style="cursor: pointer;">📘 Watch on Facebook</div>
+                    </div>
+                </div>
+
+                <!-- Video Card 3 -->
+                <div class="video-card">
+                    <div class="video-preview">
+                        <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1370109924470997&show_text=0&width=500" allow="encrypted-media" allowfullscreen></iframe>
+                        <div class="play-overlay"></div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Chronos World ft. Elixir Gaming Guild</h3>
+                        <p class="video-description">Had an amazing time playing ChronosWorld during the Elixir Guild Game Night! ⚔️🌌 Explored story-driven dungeons and endless worlds — each adventure more thrilling than the last! 🌍🔥 Can't wait for the next run with fellow adventurers! 🙌</p>
+                        <div class="facebook-badge" onclick="window.open('https://www.facebook.com/reel/1370109924470997', '_blank')" style="cursor: pointer;">📘 Watch on Facebook</div>
+                    </div>
+                </div>
+
+                <!-- Video Card 4 -->
+                <div class="video-card">
+                    <div class="video-preview">
+                        <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F820213617145111&show_text=0&width=500" allow="encrypted-media" allowfullscreen></iframe>
+                        <div class="play-overlay"></div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">BattleRise ft. TW3</h3>
+                        <p class="video-description">🎮 TW3 x BattleRise Game Night!⚔️ Embark on an epic RPG adventure commanding unique champions through rogue-like dungeons and facing Tiamat's forces! 💥 Tried all game modes—each one's packed with strategy, action, and fun! 👑</p>
+                        <div class="facebook-badge" onclick="window.open('https://www.facebook.com/reel/820213617145111', '_blank')" style="cursor: pointer;">📘 Watch on Facebook</div>
+                    </div>
+                </div>
+
+                <!-- Video Card 5 -->
+                <div class="video-card">
+                    <div class="video-preview">
+                        <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F788851140704319&show_text=0&width=500" allow="encrypted-media" allowfullscreen></iframe>
+                        <div class="play-overlay"></div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Star Atlas</h3>
+                        <p class="video-description">Still learning how to aim 😅 but I survived my first pewpew-style gamenight 🔫💫 The action was wild — can't wait to jump back in and (hopefully) hit my shots next time 😂</p>
+                        <div class="facebook-badge" onclick="window.open('https://www.facebook.com/reel/788851140704319', '_blank')" style="cursor: pointer;">📘 Watch on Facebook</div>
+                    </div>
+                </div>
+
+                <!-- Video Card 6 -->
+                <div class="video-card">
+                    <div class="video-preview">
+                        <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F694695623659559&show_text=0&width=500" allow="encrypted-media" allowfullscreen></iframe>
+                        <div class="play-overlay"></div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Solforge Fusion ft. Olympus Prime</h3>
+                        <p class="video-description">⚔️ SolForge Fusion never gets old—every match feels new with those unique fusions! 🃏🔥 Had a blast at Olympus Prime Game Night—intense, fun, and super strategic! 💯 Still need more practice, but I'm hooked! 💪</p>
+                        <div class="facebook-badge" onclick="window.open('https://www.facebook.com/reel/694695623659559', '_blank')" style="cursor: pointer;">📘 Watch on Facebook</div>
+                    </div>
+                </div>
+
+                <!-- Video Card 7 -->
+                <div class="video-card">
+                    <div class="video-preview">
+                        <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1349350206775060&show_text=0&width=500" allow="encrypted-media" allowfullscreen></iframe>
+                        <div class="play-overlay"></div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Arcade Galaxy ft. Captain Side</h3>
+                        <p class="video-description">🌌🎮 Arcade Galaxy isn't just about speed — it's about skill and patience! ✨ Race, jump, and outsmart rivals as cute, customizable animal Cubs 🦊, but be warned — those traps, boosts, and tricky maps will test your timing and focus!</p>
+                        <div class="facebook-badge" onclick="window.open('https://www.facebook.com/reel/1349350206775060', '_blank')" style="cursor: pointer;">📘 Watch on Facebook</div>
+                    </div>
+                </div>
+
+                <!-- Video Card 8 -->
+                <div class="video-card">
+                    <div class="video-preview">
+                        <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1510327190285525&show_text=0&width=500" allow="encrypted-media" allowfullscreen></iframe>
+                        <div class="play-overlay"></div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">LOL Land ft. Legion</h3>
+                        <p class="video-description">🎲 Rolled into LOL Land with the fam at Legion's Game Night — and it was a blast! 🏆 From dice rolls to big rewards, every turn kept the hype going. Nothing beats playing, competing, and winning together with the guild. 💯🔥</p>
+                        <div class="facebook-badge" onclick="window.open('https://www.facebook.com/reel/1510327190285525', '_blank')" style="cursor: pointer;">📘 Watch on Facebook</div>
+                    </div>
+                </div>
+
+                <!-- Video Card 9 -->
+                <div class="video-card">
+                    <div class="video-preview">
+                        <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2F61580921202543%2Fvideos%2F4251425575077224&show_text=0&width=500" allow="encrypted-media" allowfullscreen></iframe>
+                        <div class="play-overlay"></div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Rumble Arcade ft. Captain Side</h3>
+                        <p class="video-description">🎮🔥 Had an awesome time at Captain Side Game Night featuring Rumble Arcade! It's an exciting PvP squad battler that's perfect for both casual players and strategy lovers 🕹️⚔️ Big thanks to @captainside1, @gamingonavax, and @rumblearcade for the fun🙌</p>
+                        <div class="facebook-badge" onclick="window.open('https://www.facebook.com/61580921202543/videos/4251425575077224', '_blank')" style="cursor: pointer;">📘 Watch on Facebook</div>
+                    </div>
+                </div>
+
+                <!-- Video Card 10 -->
+                <div class="video-card">
+                    <div class="video-preview">
+                        <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2F61580921202543%2Fvideos%2F4174900772746662&show_text=0&width=500" allow="encrypted-media" allowfullscreen></iframe>
+                        <div class="play-overlay"></div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Pengu Clash ft. Olympus Prime</h3>
+                        <p class="video-description">🐧✨ Thank you Olympus Prime for introducing me to Pengu Clash! A fun browser game where penguins battle in fast-paced clashes!🔥I really enjoyed it and I'll be looking forward to the next game night 👑🎮</p>
+                        <div class="facebook-badge" onclick="window.open('https://www.facebook.com/61580921202543/videos/4174900772746662', '_blank')" style="cursor: pointer;">📘 Watch on Facebook</div>
+                    </div>
+                </div>
+
+                <!-- Video Card 11 -->
+                <div class="video-card">
+                    <div class="video-preview">
+                        <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2F61580921202543%2Fvideos%2F1313472652958635&show_text=0&width=500" allow="encrypted-media" allowfullscreen></iframe>
+                        <div class="play-overlay"></div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Solforge Fusion ft. TW3</h3>
+                        <p class="video-description">⚔️ SolForge Fusion is a hybrid deck game where every battle feels new with unique card fusions! 🃏🔥 Tried it on TW3 Game Night and wow—intense, fun, and super strategic! 💯 Thank you again for the wonderful game night!🥰</p>
+                        <div class="facebook-badge" onclick="window.open('https://www.facebook.com/61580921202543/videos/1313472652958635', '_blank')" style="cursor: pointer;">📘 Watch on Facebook</div>
+                    </div>
+                </div>
+
+                <!-- Video Card 12 -->
+                <div class="video-card">
+                    <div class="video-preview">
+                        <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2F61580921202543%2Fvideos%2F1301951628043277&show_text=0&width=500" allow="encrypted-media" allowfullscreen></iframe>
+                        <div class="play-overlay"></div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Elumia ft. TW3</h3>
+                        <p class="video-description">Legends are made in Elumia! Had an epic time at my 2nd Game Night with TW3🎮✨Sharing my adventure— join the fun!</p>
+                        <div class="facebook-badge" onclick="window.open('https://www.facebook.com/61580921202543/videos/1301951628043277', '_blank')" style="cursor: pointer;">📘 Watch on Facebook</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Judy Lou Cortes. All rights reserved. | Designed with 💜</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

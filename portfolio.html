@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                    <a href="index.html">
+                        <img src="logos/logo.png" class="logo-img">
+                    </a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="portfolio.html" class="nav-link">Portfolio</a></li>
+                <li><a href="skills.html" class="nav-link">Skills</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <h2 class="section-title">Portfolio & Projects</h2>
+            <p class="section-subtitle">A collection of my creative work and projects</p>
+            
+            <div class="portfolio-filter">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="ui-ux">UI/UX Design</button>
+                <button class="filter-btn" data-filter="content">Content Creation</button>
+                <button class="filter-btn" data-filter="graphic">Graphic Design</button>
+                <button class="filter-btn" data-filter="system">C# School Projects</button>
+            </div>
+
+            <div class="portfolio-grid">
+                <!-- UI/UX Design Projects -->
+                <div class="portfolio-item" data-category="ui-ux">
+                    <div class="portfolio-image">
+                        <div class="portfolio-overlay">
+                            <h3>Lilac Photobooth</h3>
+                            <p>Interactive photobooth web app - Take 3 photos to create your photobooth strip</p>
+                            <a href="https://itsjudyloved.github.io/lilac-photobooth/" target="_blank" class="portfolio-link">Go to Website</a>
+                        </div>
+                        <div class="portfolio-placeholder">
+                            <span class="portfolio-icon">📸</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item" data-category="ui-ux">
+                    <div class="portfolio-image">
+                        <div class="portfolio-overlay">
+                            <h3>Pet Management Hub</h3>
+                            <p>Comprehensive pet management system with intuitive UI/UX design</p>
+                            <a href="#" class="portfolio-link" data-modal="pet-management-modal">View Project</a>
+                        </div>
+                        <div class="portfolio-placeholder">
+                            <span class="portfolio-icon">🐾</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content Creation Projects -->
+                <div class="portfolio-item" data-category="content">
+                    <div class="portfolio-image">
+                        <div class="portfolio-overlay">
+                            <h3>YGG PH Allstars Content Creation</h3>
+                            <p>Engaging tutorial and promotional videos about Web3 games and crypto, created for YGGPH Allstars.</p>
+                            <a href="contentcreation.html" class="portfolio-link">View</a>
+                        </div>
+                        <div class="portfolio-placeholder">
+                            <span class="portfolio-icon">🎬</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item" data-category="content">
+                    <div class="portfolio-image">
+                        <div class="portfolio-overlay">
+                            <h3>Game Night UGC</h3>
+                            <p>Gaming UGC from multiple games and international gaming guilds</p>
+                            <a href="gamenightugc.html" class="portfolio-link">View</a>
+                        </div>
+                        <div class="portfolio-placeholder">
+                            <span class="portfolio-icon">🎮</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Graphic Design Projects -->
+                <div class="portfolio-item" data-category="graphic">
+                    <div class="portfolio-image">
+                        <div class="portfolio-overlay">
+                            <h3>Vibes TCG Social Media Campaign</h3>
+                            <p>Contributed as a <strong> Creatives Apprentice </strong> by producing digital artworks and visual assets for Vibes TCG social media campaigns at YGG Pilipinas.</p>
+                            <a href="#" class="portfolio-link" data-modal="vibes-campaign-modal">View</a>
+                        </div>
+                        <div class="portfolio-placeholder">
+                            <span class="portfolio-icon">🎴</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item" data-category="graphic">
+                    <div class="portfolio-image">
+                        <div class="portfolio-overlay">
+                            <h3>Academic Scholar's League</h3>
+                            <p>Served as <strong>Media Officer</strong>, creating visual content and graphics for social media while supporting the organization's branding and promotion of events and initiatives.</p>
+                            <a href="#" class="portfolio-link" data-modal="academic-scholars-league-modal">View</a>
+                        </div>
+                        <div class="portfolio-placeholder">
+                            <span class="portfolio-icon">🎓</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item" data-category="graphic">
+                    <div class="portfolio-image">
+                        <div class="portfolio-overlay">
+                            <h3>Zero Wing</h3>
+                            <p>Produced digital artworks and promotional visuals for social media and community events while supporting campaign planning and guild branding.</p>
+                            <a href="#" class="portfolio-link" data-modal="zero-wing-modal">View</a>
+                        </div>
+                        <div class="portfolio-placeholder">
+                            <span class="portfolio-icon">🎨</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item" data-category="graphic">
+                    <div class="portfolio-image">
+                        <div class="portfolio-overlay">
+                            <h3>YGG Unlock</h3>
+                            <p>Created digital graphics and promotional visuals for YGG Unlock events in YGG Pilipinas, supporting campaign promotion, community engagement, and event branding.</p>
+                            <a href="#" class="portfolio-link" data-modal="ygg-unlock-modal">View</a>
+                        </div>
+                        <div class="portfolio-placeholder">
+                            <span class="portfolio-icon">🔓</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- C# School Projects -->
+                <div class="portfolio-item" data-category="system">
+                    <div class="portfolio-image">
+                        <div class="portfolio-overlay">
+                            <h3>TaskHub</h3>
+                            <p> <strong>Creator</strong> of a hub where CCS students help each other, build skills, and earn along the way.</p>
+                            <a href="#" class="portfolio-link" data-modal="taskhub-modal">View Project</a>
+                        </div>
+                        <div class="portfolio-placeholder">
+                            <span class="portfolio-icon">💾</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item" data-category="system">
+                    <div class="portfolio-image">
+                        <div class="portfolio-overlay">
+                            <h3>Hangman</h3>
+                            <p>Interactive word-guessing game</p>
+                            <a href="#" class="portfolio-link" id="hangman-open-video">Play Demo</a>
+                        </div>
+                        <div class="portfolio-placeholder">
+                            <span class="portfolio-icon">🎮</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Judy Lou Cortes. All rights reserved. | Designed with 💜</p>
+        </div>
+    </footer>
+
+    <!-- Pet Management Hub Modal -->
+    <div id="pet-management-modal" class="portfolio-modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <div class="modal-header">
+                <h2>Pet Management Hub</h2>
+                <p>UI/UX Design Showcase</p>
+            </div>
+            <div class="slideshow-container">
+                <div class="slideshow-wrapper">
+                    <div class="slide active">
+                        <img src="Pet Management Hub/home dashboard.png" alt="Pet Management Hub - Home Dashboard" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="slide-placeholder" style="display: none;">
+                            <span>📸 Home Dashboard</span>
+                            <p>Add your screenshot here</p>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="Pet Management Hub/login page .png" alt="Pet Management Hub - Login Page" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="slide-placeholder" style="display: none;">
+                            <span>📸 Login Page</span>
+                            <p>Add your screenshot here</p>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="Pet Management Hub/register page.png" alt="Pet Management Hub - Register Page" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="slide-placeholder" style="display: none;">
+                            <span>📸 Register Page</span>
+                            <p>Add your screenshot here</p>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="Pet Management Hub/add pet.png" alt="Pet Management Hub - Add Pet" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="slide-placeholder" style="display: none;">
+                            <span>📸 Add Pet</span>
+                            <p>Add your screenshot here</p>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="Pet Management Hub/view all pet .png" alt="Pet Management Hub - View All Pets" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="slide-placeholder" style="display: none;">
+                            <span>📸 View All Pets</span>
+                            <p>Add your screenshot here</p>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="Pet Management Hub/about us .png" alt="Pet Management Hub - About Us" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="slide-placeholder" style="display: none;">
+                            <span>📸 About Us</span>
+                            <p>Add your screenshot here</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="slideshow-nav prev" aria-label="Previous slide">&#10094;</button>
+                <button class="slideshow-nav next" aria-label="Next slide">&#10095;</button>
+                <div class="slideshow-dots">
+                    <span class="dot active" data-slide="0"></span>
+                    <span class="dot" data-slide="1"></span>
+                    <span class="dot" data-slide="2"></span>
+                    <span class="dot" data-slide="3"></span>
+                    <span class="dot" data-slide="4"></span>
+                    <span class="dot" data-slide="5"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Vibes TCG Social Media Campaign Modal -->
+    <div id="vibes-campaign-modal" class="portfolio-modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <div class="modal-header">
+                <h2>Vibes TCG Social Media Campaign</h2>
+                <p><strong>Vibes TCG</strong> is a collectible card game based on the popular Pudgy Penguins brand, developed by Orange Cap Games, that combines physical and digital play, and YGG (Yield Guild Games) Pilipinas hosts "Learn to Play" (LTP) events, often with tournaments, to introduce the game, building community and promoting competitive Web3 gaming in the Philippines.</p>
+            </div>
+            <div class="slideshow-container">
+                <div class="slideshow-wrapper" id="vibes-slideshow">
+                    <div class="slide active">
+                        <img src="Vibes Social Media Campaign/1.png" alt="Vibes TCG Campaign - Image 1" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="slide-placeholder" style="display: none;"></div>
+                    </div>
+                    <div class="slide">
+                        <img src="Vibes Social Media Campaign/2.png" alt="Vibes TCG Campaign - Image 2" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="slide-placeholder" style="display: none;"></div>
+                    </div>
+                    <div class="slide">
+                        <img src="Vibes Social Media Campaign/3.png" alt="Vibes TCG Campaign - Image 3" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="slide-placeholder" style="display: none;"></div>
+                    </div>
+                    <div class="slide">
+                        <img src="Vibes Social Media Campaign/4.png" alt="Vibes TCG Campaign - Image 4" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="slide-placeholder" style="display: none;"></div>
+                    </div>
+                    <div class="slide">
+                        <img src="Vibes Social Media Campaign/5.png" alt="Vibes TCG Campaign - Image 5" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="slide-placeholder" style="display: none;"></div>
+                    </div>
+                    <div class="slide">
+                        <img src="Vibes Social Media Campaign/6.png" alt="Vibes TCG Campaign - Image 6" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="slide-placeholder" style="display: none;"></div>
+                    </div>
+                    <div class="slide">
+                        <img src="Vibes Social Media Campaign/7.png" alt="Vibes TCG Campaign - Image 7" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="slide-placeholder" style="display: none;"></div>
+                    </div>
+                    <div class="slide">
+                        <img src="Vibes Social Media Campaign/8.png" alt="Vibes TCG Campaign - Image 8" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="slide-placeholder" style="display: none;"></div>
+                    </div>
+                    <div class="slide">
+                        <img src="Vibes Social Media Campaign/9.png" alt="Vibes TCG Campaign - Image 9" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="slide-placeholder" style="display: none;"></div>
+                    </div>
+                </div>
+                <button class="slideshow-nav prev" aria-label="Previous slide">&#10094;</button>
+                <button class="slideshow-nav next" aria-label="Next slide">&#10095;</button>
+                <div class="slideshow-dots" id="vibes-dots">
+                    <span class="dot active" data-slide="0"></span>
+                    <span class="dot" data-slide="1"></span>
+                    <span class="dot" data-slide="2"></span>
+                    <span class="dot" data-slide="3"></span>
+                    <span class="dot" data-slide="4"></span>
+                    <span class="dot" data-slide="5"></span>
+                    <span class="dot" data-slide="6"></span>
+                    <span class="dot" data-slide="7"></span>
+                    <span class="dot" data-slide="8"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Zero Wing Modal -->
+    <div id="zero-wing-modal" class="portfolio-modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <div class="modal-header">
+                <h2>Zero Wing</h2>
+                <p>Digital artworks and promotional visuals for social media and community events</p>
+            </div>
+            <div class="slideshow-container">
+                <div class="slideshow-wrapper" id="zero-wing-slideshow">
+                    <div class="slide active">
+                        <img src="Zero Wing Posters/Azzazel Birthday.png" alt="Zero Wing - Azzazel Birthday" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="slide-placeholder" style="display: none;"></div>
+                    </div>
+                    <div class="slide">
+                        <img src="Zero Wing Posters/Guide to GAP.png" alt="Zero Wing - Guide to GAP" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="slide-placeholder" style="display: none;"></div>
+                    </div>
+                    <div class="slide">
+                        <img src="Zero Wing Posters/TMS GameNight.jpg" alt="Zero Wing - TMS GameNight" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="slide-placeholder" style="display: none;"></div>
+                    </div>
+                    <div class="slide">
+                        <img src="Zero Wing Posters/TMS GameNight1.jpg" alt="Zero Wing - TMS GameNight 1" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="slide-placeholder" style="display: none;"></div>
+                    </div>
+                    <div class="slide">
+                        <img src="Zero Wing Posters/ZW Game Night.jpg" alt="Zero Wing - Game Night" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="slide-placeholder" style="display: none;"></div>
+                    </div>
+                    <div class="slide">
+                        <img src="Zero Wing Posters/ZW X-Mas.jpg" alt="Zero Wing - X-Mas" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="slide-placeholder" style="display: none;"></div>
+                    </div>
+                </div>
+                <button class="slideshow-nav prev" aria-label="Previous slide">&#10094;</button>
+                <button class="slideshow-nav next" aria-label="Next slide">&#10095;</button>
+                <div class="slideshow-dots" id="zero-wing-dots">
+                    <span class="dot active" data-slide="0"></span>
+                    <span class="dot" data-slide="1"></span>
+                    <span class="dot" data-slide="2"></span>
+                    <span class="dot" data-slide="3"></span>
+                    <span class="dot" data-slide="4"></span>
+                    <span class="dot" data-slide="5"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- YGG Unlock Modal -->
+    <div id="ygg-unlock-modal" class="portfolio-modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <div class="modal-header">
+                <h2>YGG Unlock</h2>
+                <p>Graphic design and visual content creation</p>
+            </div>
+            <div class="slideshow-container">
+                <div class="slideshow-wrapper" id="ygg-unlock-slideshow">
+                    <div class="slide active">
+                        <img src="YGG UNLOCK/hok 1.jpg" alt="YGG Unlock - HOK 1" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="slide-placeholder" style="display: none;"></div>
+                    </div>
+                    <div class="slide">
+                        <img src="YGG UNLOCK/judyloved (13).png" alt="YGG Unlock - Image 13" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="slide-placeholder" style="display: none;"></div>
+                    </div>
+                    <div class="slide">
+                        <img src="YGG UNLOCK/judyloved (15).png" alt="YGG Unlock - Image 15" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="slide-placeholder" style="display: none;"></div>
+                    </div>
+                    <div class="slide">
+                        <img src="YGG UNLOCK/judyloved (16).png" alt="YGG Unlock - Image 16" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="slide-placeholder" style="display: none;"></div>
+                    </div>
+                    <div class="slide">
+                        <img src="YGG UNLOCK/judyloved FINAL (1).png" alt="YGG Unlock - Final" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="slide-placeholder" style="display: none;"></div>
+                    </div>
+                    <div class="slide">
+                        <img src="YGG UNLOCK/rl 1.jpg" alt="YGG Unlock - RL 1" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="slide-placeholder" style="display: none;"></div>
+                    </div>
+                    <div class="slide">
+                        <img src="YGG UNLOCK/rl 2.jpg" alt="YGG Unlock - RL 2" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="slide-placeholder" style="display: none;"></div>
+                    </div>
+                </div>
+                <button class="slideshow-nav prev" aria-label="Previous slide">&#10094;</button>
+                <button class="slideshow-nav next" aria-label="Next slide">&#10095;</button>
+                <div class="slideshow-dots" id="ygg-unlock-dots">
+                    <span class="dot active" data-slide="0"></span>
+                    <span class="dot" data-slide="1"></span>
+                    <span class="dot" data-slide="2"></span>
+                    <span class="dot" data-slide="3"></span>
+                    <span class="dot" data-slide="4"></span>
+                    <span class="dot" data-slide="5"></span>
+                    <span class="dot" data-slide="6"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Academic Scholars League Modal -->
+    <div id="academic-scholars-league-modal" class="portfolio-modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <div class="modal-header">
+                <h2>Academic Scholars League</h2>
+                <p>Served as <strong>Media Officer</strong>, creating visual content and graphics for social media while supporting the organization's branding and promotion of events and initiatives.</p>
+            </div>
+            <div class="slideshow-container">
+                <div class="slideshow-wrapper" id="academic-scholars-league-slideshow">
+                    <div class="slide active">
+                        <div class="slide-content">
+                            <img src="Academic Scholars League/ASL Concert Frame Layout.png" alt="ASL Concert Frame Layout" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="slide-title">ASL Concert Frame Layout</div>
+                        </div>
+                        <div class="slide-placeholder" style="display: none;"></div>
+                    </div>
+                    <div class="slide">
+                        <div class="slide-content">
+                            <img src="Academic Scholars League/ASL General Assembly 2024.jpg" alt="ASL General Assembly 2024" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="slide-title">ASL General Assembly 2024</div>
+                        </div>
+                        <div class="slide-placeholder" style="display: none;"></div>
+                    </div>
+                    <div class="slide">
+                        <div class="slide-content">
+                            <img src="Academic Scholars League/ASL INTRAMS 2024.png" alt="ASL INTRAMS 2024" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="slide-title">ASL INTRAMS 2024</div>
+                        </div>
+                        <div class="slide-placeholder" style="display: none;"></div>
+                    </div>
+                    <div class="slide">
+                        <div class="slide-content">
+                            <img src="Academic Scholars League/ASL Oath Taking.png" alt="ASL Oath Taking" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="slide-title">ASL Oath Taking</div>
+                        </div>
+                        <div class="slide-placeholder" style="display: none;"></div>
+                    </div>
+                    <div class="slide">
+                        <div class="slide-content">
+                            <img src="Academic Scholars League/ASL Research Seminar Frame Layout.png" alt="ASL Research Seminar Frame Layout" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="slide-title">ASL Research Seminar Frame Layout</div>
+                        </div>
+                        <div class="slide-placeholder" style="display: none;"></div>
+                    </div>
+                    <div class="slide">
+                        <div class="slide-content">
+                            <img src="Academic Scholars League/ASL Valentines Day.png" alt="ASL Valentines Day" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="slide-title">ASL Valentines Day</div>
+                        </div>
+                        <div class="slide-placeholder" style="display: none;"></div>
+                    </div>
+                    <div class="slide">
+                        <div class="slide-content">
+                            <img src="Academic Scholars League/CAREs Gift Giving.png" alt="CAREs Gift Giving" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="slide-title">CAREs Gift Giving</div>
+                        </div>
+                        <div class="slide-placeholder" style="display: none;"></div>
+                    </div>
+                    <div class="slide">
+                        <div class="slide-content">
+                            <img src="Academic Scholars League/FINAL Funday Photobooth Template.png" alt="FINAL Funday Photobooth Template" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="slide-title">FINAL Funday Photobooth Template</div>
+                        </div>
+                        <div class="slide-placeholder" style="display: none;"></div>
+                    </div>
+                    <div class="slide">
+                        <div class="slide-content">
+                            <img src="Academic Scholars League/Ice Cream Giving Frame Layout.jpg" alt="Ice Cream Giving Frame Layout" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="slide-title">Ice Cream Giving Frame Layout</div>
+                        </div>
+                        <div class="slide-placeholder" style="display: none;"></div>
+                    </div>
+                    <div class="slide">
+                        <div class="slide-content">
+                            <img src="Academic Scholars League/Intrams Bulletin.png" alt="Intrams Bulletin" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="slide-title">Intrams Bulletin</div>
+                        </div>
+                        <div class="slide-placeholder" style="display: none;"></div>
+                    </div>
+                    <div class="slide">
+                        <div class="slide-content">
+                            <img src="Academic Scholars League/PSA Charter Day.jpg" alt="PSA Charter Day" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="slide-title">PSA Charter Day</div>
+                        </div>
+                        <div class="slide-placeholder" style="display: none;"></div>
+                    </div>
+                    <div class="slide">
+                        <div class="slide-content">
+                            <img src="Academic Scholars League/PSA UC Days 2024.jpg" alt="PSA UC Days 2024" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="slide-title">PSA UC Days 2024</div>
+                        </div>
+                        <div class="slide-placeholder" style="display: none;"></div>
+                    </div>
+                    <div class="slide">
+                        <div class="slide-content">
+                            <img src="Academic Scholars League/Team Building 2025.png" alt="Team Building 2025" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="slide-title">Team Building 2025</div>
+                        </div>
+                        <div class="slide-placeholder" style="display: none;"></div>
+                    </div>
+                    <div class="slide">
+                        <div class="slide-content">
+                            <img src="Academic Scholars League/Welcome Back To School.png" alt="Welcome Back To School" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="slide-title">Welcome Back To School</div>
+                        </div>
+                        <div class="slide-placeholder" style="display: none;"></div>
+                    </div>
+                </div>
+                <button class="slideshow-nav prev" aria-label="Previous slide">&#10094;</button>
+                <button class="slideshow-nav next" aria-label="Next slide">&#10095;</button>
+                <div class="slideshow-dots" id="academic-scholars-league-dots">
+                    <span class="dot active" data-slide="0"></span>
+                    <span class="dot" data-slide="1"></span>
+                    <span class="dot" data-slide="2"></span>
+                    <span class="dot" data-slide="3"></span>
+                    <span class="dot" data-slide="4"></span>
+                    <span class="dot" data-slide="5"></span>
+                    <span class="dot" data-slide="6"></span>
+                    <span class="dot" data-slide="7"></span>
+                    <span class="dot" data-slide="8"></span>
+                    <span class="dot" data-slide="9"></span>
+                    <span class="dot" data-slide="10"></span>
+                    <span class="dot" data-slide="11"></span>
+                    <span class="dot" data-slide="12"></span>
+                    <span class="dot" data-slide="13"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+            <!-- TaskHub Modal -->
+            <div id="taskhub-modal" class="portfolio-modal">
+                <div class="modal-overlay"></div>
+                <div class="modal-content">
+                    <button class="modal-close">&times;</button>
+                    <div class="modal-header">
+                        <h2>TaskHub</h2>
+                        <p>Desktop UI/UX showcase — <strong>TaskHub</strong> a student task & collaboration system</p>
+                    </div>
+                    <div class="slideshow-container">
+                        <div class="slideshow-wrapper" id="taskhub-slideshow">
+                            <div class="slide active">
+                                <img src="TaskHub/1.png" alt="TaskHub - Screenshot 1" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="slide-placeholder" style="display: none;">
+                                    <span>📸 TaskHub Screenshot 1</span>
+                                    <p>Add your screenshot here</p>
+                                </div>
+                            </div>
+                            <div class="slide">
+                                <img src="TaskHub/2.png" alt="TaskHub - Screenshot 2" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="slide-placeholder" style="display: none;">
+                                    <span>📸 TaskHub Screenshot 2</span>
+                                    <p>Add your screenshot here</p>
+                                </div>
+                            </div>
+                            <div class="slide">
+                                <img src="TaskHub/3.png" alt="TaskHub - Screenshot 3" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="slide-placeholder" style="display: none;">
+                                    <span>📸 TaskHub Screenshot 3</span>
+                                    <p>Add your screenshot here</p>
+                                </div>
+                            </div>
+                            <div class="slide">
+                                <img src="TaskHub/4.png" alt="TaskHub - Screenshot 4" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="slide-placeholder" style="display: none;">
+                                    <span>📸 TaskHub Screenshot 4</span>
+                                    <p>Add your screenshot here</p>
+                                </div>
+                            </div>
+                            <div class="slide">
+                                <img src="TaskHub/5.png" alt="TaskHub - Screenshot 5" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="slide-placeholder" style="display: none;">
+                                    <span>📸 TaskHub Screenshot 5</span>
+                                    <p>Add your screenshot here</p>
+                                </div>
+                            </div>
+                            <div class="slide">
+                                <img src="TaskHub/6.png" alt="TaskHub - Screenshot 6" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="slide-placeholder" style="display: none;">
+                                    <span>📸 TaskHub Screenshot 6</span>
+                                    <p>Add your screenshot here</p>
+                                </div>
+                            </div>
+                            <div class="slide">
+                                <img src="TaskHub/7.png" alt="TaskHub - Screenshot 7" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="slide-placeholder" style="display: none;">
+                                    <span>📸 TaskHub Screenshot 7</span>
+                                    <p>Add your screenshot here</p>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="slideshow-nav prev" aria-label="Previous slide">&#10094;</button>
+                        <button class="slideshow-nav next" aria-label="Next slide">&#10095;</button>
+                        <div class="slideshow-dots" id="taskhub-dots">
+                            <span class="dot active" data-slide="0"></span>
+                            <span class="dot" data-slide="1"></span>
+                            <span class="dot" data-slide="2"></span>
+                            <span class="dot" data-slide="3"></span>
+                            <span class="dot" data-slide="4"></span>
+                            <span class="dot" data-slide="5"></span>
+                            <span class="dot" data-slide="6"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hangman Video Modal -->
+            <div id="hangman-video-modal" class="portfolio-modal">
+                <div class="modal-overlay"></div>
+                <div class="modal-content video-modal">
+                    <button class="modal-close">&times;</button>
+                    <div class="modal-header">
+                        <h2>Hangman Game Demo</h2>
+                        <p>Watch the interactive word-guessing game in action</p>
+                    </div>
+                    <div class="video-container">
+                        <div class="hangman-video-card">
+                            <div class="video-thumbnail">
+                                <img src="logos/profile.png" alt="Hangman Game Demo Thumbnail" style="width: 100%; height: 100%; object-fit: cover;">
+                                <div class="play-button">▶</div>
+                            </div>
+                            <div class="video-info">
+                                <h3>Hangman Game Demo</h3>
+                                <p>Interactive word-guessing game - Test your vocabulary and guessing skills!</p>
+                                <a href="#" class="watch-button" id="hangman-modal-play">
+                                    📺 Play Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hangman Video Overlay (loads Facebook plugin iframe on demand) -->
+            <div id="hangman-player-overlay" class="video-overlay" aria-hidden="true">
+                <div class="video-overlay-backdrop"></div>
+                <div class="video-overlay-content">
+                    <button class="video-overlay-close" aria-label="Close video">&times;</button>
+                    <div class="video-iframe-wrap">
+                        <iframe id="hangman-video-iframe" src="" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <style>
+        /* Portfolio Modal Styles */
+        .portfolio-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .portfolio-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            position: relative;
+            background: var(--white);
+            border-radius: 20px;
+            max-width: 90%;
+            max-height: 90vh;
+            width: 1000px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            z-index: 10001;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--purple-primary);
+            color: var(--white);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 10002;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            line-height: 1;
+        }
+
+        .modal-close:hover {
+            background: var(--purple-dark);
+            transform: rotate(90deg);
+        }
+
+        .modal-header {
+            padding: 2rem;
+            text-align: center;
+            border-bottom: 2px solid var(--purple-lighter);
+        }
+
+        .modal-header h2 {
+            font-size: 2rem;
+            color: var(--purple-darker);
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-header p {
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        .slideshow-container {
+            position: relative;
+            flex: 1;
+            overflow: hidden;
+            background: var(--off-white);
+        }
+
+        .slideshow-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            min-height: 500px;
+        }
+
+        .slide {
+            display: none;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            animation: slideIn 0.5s ease;
+        }
+
+        .slide.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #academic-scholars-league-modal .slide.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide img {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+
+        .slide-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            min-height: 500px;
+            background: var(--purple-lighter);
+            color: var(--purple-darker);
+            font-size: 2rem;
+        }
+
+        .slide-placeholder p {
+            margin-top: 1rem;
+            font-size: 1rem;
+            color: var(--text-light);
+        }
+
+        #academic-scholars-league-modal .slide-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+        }
+
+        #academic-scholars-league-modal .slide-content img {
+            max-width: 100%;
+            max-height: calc(100% - 60px);
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        #academic-scholars-league-modal .slide-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--purple-darker);
+            text-align: center;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            font-family: 'Poppins', sans-serif;
+            margin-top: 10px;
+        }
+
+        .slideshow-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(177, 156, 217, 0.9);
+            color: var(--white);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 10002;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slideshow-nav:hover {
+            background: var(--purple-primary);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .slideshow-nav.prev {
+            left: 20px;
+        }
+
+        .slideshow-nav.next {
+            right: 20px;
+        }
+
+        .slideshow-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10002;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active,
+        .dot:hover {
+            background: var(--white);
+            transform: scale(1.2);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .modal-content {
+                max-width: 95%;
+                width: 100%;
+                max-height: 95vh;
+            }
+
+            .modal-header {
+                padding: 1.5rem;
+            }
+
+            .modal-header h2 {
+                font-size: 1.5rem;
+            }
+
+            .slideshow-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+
+            .slideshow-nav.prev {
+                left: 10px;
+            }
+
+            .slideshow-nav.next {
+                right: 10px;
+            }
+
+            #academic-scholars-league-modal .slide-content {
+                padding: 15px;
+            }
+
+            #academic-scholars-league-modal .slide-content img {
+                max-height: calc(100% - 50px);
+                margin-bottom: 10px;
+            }
+
+            #academic-scholars-league-modal .slide-title {
+                font-size: 1rem;
+                padding: 8px 15px;
+                margin-top: 5px;
+            }
+        }
+
+        /* Video Modal Styles */
+        .modal-content.video-modal {
+            width: 90%;
+            max-width: 700px;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+        }
+
+        .video-container {
+            flex: 1;
+            position: relative;
+            width: 100%;
+            background: #f5f5f5;
+            border-radius: 0 0 20px 20px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .hangman-video-card {
+            width: 100%;
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .video-thumbnail {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%;
+            background: linear-gradient(135deg, var(--purple-light), var(--purple-lighter));
+            overflow: hidden;
+        }
+
+        .video-thumbnail img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(177, 156, 217, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: var(--white);
+            z-index: 2;
+        }
+
+        .video-info {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .video-info h3 {
+            font-size: 1.3rem;
+            color: var(--purple-darker);
+            margin-bottom: 0.5rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .video-info p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+        }
+
+        .watch-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--purple-primary), var(--purple-dark));
+            color: var(--white);
+            padding: 0.8rem 1.5rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(139, 122, 168, 0.3);
+        }
+
+        .watch-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(139, 122, 168, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .modal-content.video-modal {
+                width: 95%;
+                max-width: 100%;
+                max-height: 85vh;
+                padding: 0;
+            }
+
+            .video-container {
+                padding: 1rem;
+            }
+
+            .video-info h3 {
+                font-size: 1.1rem;
+            }
+
+            .video-info p {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Hangman Video Overlay Styles */
+        .video-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 11000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-overlay.active {
+            display: flex;
+        }
+
+        .video-overlay-backdrop {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(4px);
+        }
+
+        .video-overlay-content {
+            position: relative;
+            width: 90%;
+            max-width: 1000px;
+            border-radius: 12px;
+            overflow: hidden;
+            z-index: 11001;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+            background: #000;
+        }
+
+        .video-overlay-close {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: var(--purple-primary);
+            color: var(--white);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 11002;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-iframe-wrap {
+            position: relative;
+            padding-top: 56.25%;
+            width: 100%;
+            background: #000;
+        }
+
+        #hangman-video-iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        @media (max-width: 480px) {
+            .video-overlay-content { width: 95%; }
+        }
+    </style>
+
+    <script src="script.js"></script>
+    <script>
+        // Portfolio Modal Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const modalTriggers = document.querySelectorAll('[data-modal]');
+            const modals = document.querySelectorAll('.portfolio-modal');
+            const closeButtons = document.querySelectorAll('.modal-close');
+            const overlay = document.querySelectorAll('.modal-overlay');
+
+            // Open modal
+            modalTriggers.forEach(trigger => {
+                trigger.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const modalId = this.getAttribute('data-modal');
+                    const modal = document.getElementById(modalId);
+                    if (modal) {
+                        modal.classList.add('active');
+                        document.body.style.overflow = 'hidden';
+                        initSlideshow(modal);
+                    }
+                });
+            });
+
+            // Close modal
+            function closeModal(modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            closeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const modal = this.closest('.portfolio-modal');
+                    closeModal(modal);
+                });
+            });
+
+            overlay.forEach(ov => {
+                ov.addEventListener('click', function() {
+                    const modal = this.closest('.portfolio-modal');
+                    closeModal(modal);
+                });
+            });
+
+            // Close on Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    modals.forEach(modal => {
+                        if (modal.classList.contains('active')) {
+                            closeModal(modal);
+                        }
+                    });
+                }
+            });
+
+            // Slideshow functionality
+            function initSlideshow(modal) {
+                const slides = modal.querySelectorAll('.slide');
+                const dots = modal.querySelectorAll('.dot');
+                const prevBtn = modal.querySelector('.slideshow-nav.prev');
+                const nextBtn = modal.querySelector('.slideshow-nav.next');
+                let currentSlide = 0;
+
+                function showSlide(index) {
+                    slides.forEach((slide, i) => {
+                        slide.classList.remove('active');
+                        if (i === index) {
+                            slide.classList.add('active');
+                        }
+                    });
+                    dots.forEach((dot, i) => {
+                        dot.classList.remove('active');
+                        if (i === index) {
+                            dot.classList.add('active');
+                        }
+                    });
+                    currentSlide = index;
+                }
+
+                function nextSlide() {
+                    currentSlide = (currentSlide + 1) % slides.length;
+                    showSlide(currentSlide);
+                }
+
+                function prevSlide() {
+                    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+                    showSlide(currentSlide);
+                }
+
+                if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+                if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+
+                dots.forEach((dot, index) => {
+                    dot.addEventListener('click', () => showSlide(index));
+                });
+
+                // Keyboard navigation
+                modal.addEventListener('keydown', function(e) {
+                    if (e.key === 'ArrowLeft') prevSlide();
+                    if (e.key === 'ArrowRight') nextSlide();
+                });
+            }
+        });
+    </script>
+    <script>
+        // Hangman video overlay: load Facebook plugin iframe on demand and stop on close
+        document.addEventListener('DOMContentLoaded', function() {
+            const openBtn = document.getElementById('hangman-open-video');
+            const playThumb = document.querySelector('.hangman-video-card .play-button');
+            const overlay = document.getElementById('hangman-player-overlay');
+            const backdrop = overlay ? overlay.querySelector('.video-overlay-backdrop') : null;
+            const closeBtn = overlay ? overlay.querySelector('.video-overlay-close') : null;
+            const iframe = document.getElementById('hangman-video-iframe');
+            // autoplay=1 increases chances the player will start automatically
+            const fbPlugin = 'https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F856788833777965&show_text=0&width=560&autoplay=1';
+
+            function openOverlay() {
+                if (!iframe) return;
+                // set src only when opening to avoid preloading
+                // include autoplay parameter so the video attempts to start automatically
+                iframe.src = fbPlugin;
+                overlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeOverlay() {
+                if (!overlay) return;
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+                // stop playback by clearing the iframe src
+                if (iframe) iframe.src = '';
+            }
+
+            if (openBtn) openBtn.addEventListener('click', function(e) { e.preventDefault(); openOverlay(); });
+            // support opening from the modal's internal play button as well
+            const modalPlayBtn = document.getElementById('hangman-modal-play');
+            if (modalPlayBtn) modalPlayBtn.addEventListener('click', function(e) { e.preventDefault(); openOverlay(); });
+            if (playThumb) playThumb.addEventListener('click', function(e) { e.preventDefault(); openOverlay(); });
+            if (closeBtn) closeBtn.addEventListener('click', closeOverlay);
+            if (backdrop) backdrop.addEventListener('click', closeOverlay);
+
+            // Close with Escape if overlay open
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && overlay && overlay.classList.contains('active')) {
+                    closeOverlay();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+

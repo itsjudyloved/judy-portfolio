@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content Creation</title>
+    <link rel="icon" href="logos/solo.png" type="image/png">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Content Creation Feed Styles */
+        .content-creation-page {
+            min-height: 100vh;
+            background: linear-gradient(180deg, var(--off-white) 0%, var(--white) 100%);
+            padding-top: 100px;
+        }
+
+        .page-header {
+            text-align: center;
+            padding: 3rem 20px 2rem;
+            background: var(--white);
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--purple-primary);
+            text-decoration: none;
+            font-weight: 500;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            color: var(--purple-dark);
+            transform: translateX(-5px);
+        }
+
+        .feed-container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 2rem 20px;
+            overflow-x: auto;
+        }
+
+        .video-feed {
+            display: flex;
+            flex-direction: row;
+            gap: 2rem;
+            overflow-x: auto;
+            padding-bottom: 1rem;
+        }
+
+        .video-feed::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .video-feed::-webkit-scrollbar-track {
+            background: var(--purple-lighter);
+            border-radius: 10px;
+        }
+
+        .video-feed::-webkit-scrollbar-thumb {
+            background: var(--purple-primary);
+            border-radius: 10px;
+        }
+
+        .video-feed::-webkit-scrollbar-thumb:hover {
+            background: var(--purple-dark);
+        }
+
+        .video-card {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 25px var(--shadow-light);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            flex: 0 0 350px;
+            min-width: 350px;
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px var(--shadow-heavy);
+        }
+
+        .video-preview {
+            position: relative;
+            width: 100%;
+            padding-top: 177.78%; /* 9:16 vertical/portrait aspect ratio */
+            background: linear-gradient(135deg, var(--purple-light), var(--purple-lighter));
+            overflow: hidden;
+        }
+
+        .video-preview iframe {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transform: translateY(-50%);
+            border: none;
+        }
+
+        .video-preview img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-preview video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .play-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .play-overlay::before {
+            content: '';
+            width: 0;
+            height: 0;
+            border-left: 18px solid var(--purple-primary);
+            border-top: 12px solid transparent;
+            border-bottom: 12px solid transparent;
+            margin-left: 4px;
+        }
+
+        .video-card:hover .play-overlay {
+            opacity: 0;
+        }
+
+        .video-info {
+            padding: 1.5rem;
+        }
+
+        .video-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--purple-darker);
+            margin-bottom: 0.5rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .video-description {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .video-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .video-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .tiktok-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--purple-lighter);
+            color: var(--purple-primary);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-top: 0.5rem;
+        }
+
+        .placeholder-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--purple-darker);
+        }
+
+        .placeholder-video-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .placeholder-video-text {
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .feed-container {
+                padding: 1rem 15px;
+            }
+
+            .video-card {
+                flex: 0 0 280px;
+                min-width: 280px;
+            }
+
+            .play-overlay {
+                width: 60px;
+                height: 60px;
+            }
+
+            .play-overlay::before {
+                border-left: 18px solid var(--purple-primary);
+                border-top: 12px solid transparent;
+                border-bottom: 12px solid transparent;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo"><a href="index.html" style="text-decoration: none; color: inherit;">Judy Lou Cortes</a></div>
+            <ul class="nav-menu">
+                <li><a href="index.html#home" class="nav-link">Home</a></li>
+                <li><a href="index.html#about" class="nav-link">About</a></li>
+                <li><a href="index.html#portfolio" class="nav-link">Portfolio</a></li>
+                <li><a href="index.html#skills" class="nav-link">Skills</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Content Creation Page -->
+    <section class="content-creation-page">
+        <div class="page-header">
+            <a href="portfolio.html#content" class="back-button">
+                <span>←</span> Back to Content Creation
+            </a>
+            <h1 class="section-title">YGGPH Allstars Content Creation</h1>
+            <p class="section-subtitle">A video content series featuring tutorials and promotions for Web3 games and crypto through YGGPH Allstars.</p>
+        </div>
+
+        <div class="feed-container">
+            <div class="video-feed">
+                <!-- Video Card 1 -->
+                <div class="video-card">
+                    <div class="video-preview">
+                        <iframe src="https://www.tiktok.com/embed/v2/7528630380581096722" allow="encrypted-media" allowfullscreen></iframe>
+                        <div class="play-overlay"></div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Spekter Agency</h3>
+                        <p class="video-description">AGENTS. ASSEMBLE. 🛡 May secret ops sa Telegram — no download needed.</p>
+                        <div class="tiktok-badge" onclick="window.open('https://www.tiktok.com/@judylovedygg/video/7528630380581096722', '_blank')" style="cursor: pointer;">🎵 Watch on TikTok</div>
+                    </div>
+                </div>
+
+                <!-- Video Card 2 -->
+                <div class="video-card">
+                    <div class="video-preview">
+                        <iframe src="https://www.tiktok.com/embed/v2/7521956569811078418" allow="encrypted-media" allowfullscreen></iframe>
+                        <div class="play-overlay"></div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Vibes TCG</h3>
+                        <p class="video-description">Vibes? Caught. Community? Found. Cards? Start playing Vibes TCG – it's fun, friendly, and free to play!</p>
+                        <div class="tiktok-badge" onclick="window.open('https://www.tiktok.com/@judylovedygg/video/7521956569811078418', '_blank')" style="cursor: pointer;">🎵 Watch on TikTok</div>
+                    </div>
+                </div>
+
+                <!-- Video Card 3 -->
+                <div class="video-card">
+                    <div class="video-preview">
+                        <iframe src="https://www.tiktok.com/embed/v2/7556025387461987601" allow="encrypted-media" allowfullscreen></iframe>
+                        <div class="play-overlay"></div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Ragnarok Libre</h3>
+                        <p class="video-description">✨ Ready for your next adventure? ✨ Level Up → Refer → Submit → Unlock exclusive in-game goodies! 🎉</p>
+                        <div class="tiktok-badge" onclick="window.open('https://www.tiktok.com/@judylovedygg/video/7556025387461987601', '_blank')" style="cursor: pointer;">🎵 Watch on TikTok</div>
+                    </div>
+                </div>
+
+                <!-- Video Card 4 -->
+                <div class="video-card">
+                    <div class="video-preview">
+                        <iframe src="https://www.tiktok.com/embed/v2/7421220764063468818" allow="encrypted-media" allowfullscreen></iframe>
+                        <div class="play-overlay"></div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Nine Chronicles</h3>
+                        <p class="video-description">Join the 'Brave Cat's Journey' and earn 800 YGG points while exploring adventures and battling in the arena!</p>
+                        <div class="tiktok-badge" onclick="window.open('https://www.tiktok.com/@judylovedygg/video/7421220764063468818', '_blank')" style="cursor: pointer;">🎵 Watch on TikTok</div>
+                    </div>
+                </div>
+
+                <!-- Video Card 5 -->
+                <div class="video-card">
+                    <div class="video-preview">
+                        <iframe src="https://www.tiktok.com/embed/v2/7431622524036746512" allow="encrypted-media" allowfullscreen></iframe>
+                        <div class="play-overlay"></div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">YGG Play Summit Indus Tournament</h3>
+                        <p class="video-description">Ready for action? 🚨 Indus drops this November! Compete in the #YGGPlaySummit Showdown for a $10K Prize Pool!</p>
+                        <div class="tiktok-badge" onclick="window.open('https://www.tiktok.com/@judylovedygg/video/7431622524036746512', '_blank')" style="cursor: pointer;">🎵 Watch on TikTok</div>
+                    </div>
+                </div>
+
+                <!-- Video Card 6 -->
+                <div class="video-card">
+                    <div class="video-preview">
+                        <iframe src="https://www.tiktok.com/embed/v2/7432179008671894805" allow="encrypted-media" allowfullscreen></iframe>
+                        <div class="play-overlay"></div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">YGG Play Summit 2024 Tournaments</h3>
+                        <p class="video-description">🎉 Ready for the epic #YGGPlaySummit showdown? 🎉 From intense tournaments to the grand Cosplay Championships!</p>
+                        <div class="tiktok-badge" onclick="window.open('https://www.tiktok.com/@judylovedygg/video/7432179008671894805', '_blank')" style="cursor: pointer;">🎵 Watch on TikTok</div>
+                    </div>
+                </div>
+
+                <!-- Video Card 7 -->
+                <div class="video-card">
+                    <div class="video-preview">
+                        <iframe src="https://www.tiktok.com/embed/v2/7443842764602641682" allow="encrypted-media" allowfullscreen></iframe>
+                        <div class="play-overlay"></div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">YGG Allstar Content Creation</h3>
+                        <p class="video-description">🚀 Are you a content creator? Join YGG Allstar, complete quests, and earn $YGG tokens! Let's create together! 🌟</p>
+                        <div class="tiktok-badge" onclick="window.open('https://www.tiktok.com/@judylovedygg/video/7443842764602641682', '_blank')" style="cursor: pointer;">🎵 Watch on TikTok</div>
+                    </div>
+                </div>
+
+                <!-- Video Card 8 -->
+                <div class="video-card">
+                    <div class="video-preview">
+                        <iframe src="https://www.tiktok.com/embed/v2/7511928727735897362" allow="encrypted-media" allowfullscreen></iframe>
+                        <div class="play-overlay"></div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Solflare</h3>
+                        <p class="video-description">🚨 Level Up with the Solflare Crypto Card! 🚀</p>
+                        <div class="tiktok-badge" onclick="window.open('https://www.tiktok.com/@judylovedygg/video/7511928727735897362', '_blank')" style="cursor: pointer;">🎵 Watch on TikTok</div>
+                    </div>
+                </div>
+
+                <!-- Video Card 9 -->
+                <div class="video-card">
+                    <div class="video-preview">
+                        <iframe src="https://www.tiktok.com/embed/v2/7538829715482742023" allow="encrypted-media" allowfullscreen></iframe>
+                        <div class="play-overlay"></div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Vibes TCG 2.0</h3>
+                        <p class="video-description">🐧 Every Play Has Its Vibe! 🐧 From tutorials to ranked battles, Vibes TCG is fun, strategic, and easy to learn!</p>
+                        <div class="tiktok-badge" onclick="window.open('https://www.tiktok.com/@judylovedygg/video/7538829715482742023', '_blank')" style="cursor: pointer;">🎵 Watch on TikTok</div>
+                    </div>
+                </div>
+
+                <!-- Video Card 10 -->
+                <div class="video-card">
+                    <div class="video-preview">
+                        <iframe src="https://www.tiktok.com/embed/v2/7487464251985120519" allow="encrypted-media" allowfullscreen></iframe>
+                        <div class="play-overlay"></div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">YGG Play Summit 2024 Anichess Tournament</h3>
+                        <p class="video-description">Get ready for the ultimate battle of strategy and skill! ♟🔥 The Anichess Tournament is here with a 100k PHP prize pool! 🏆💰</p>
+                        <div class="tiktok-badge" onclick="window.open('https://www.tiktok.com/@judylovedygg/video/7487464251985120519', '_blank')" style="cursor: pointer;">🎵 Watch on TikTok</div>
+                    </div>
+                </div>
+
+                <!-- Video Card 11 -->
+                <div class="video-card">
+                    <div class="video-preview">
+                        <iframe src="https://www.tiktok.com/embed/v2/7448359785747074312" allow="encrypted-media" allowfullscreen></iframe>
+                        <div class="play-overlay"></div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">YGG Onchain Guild</h3>
+                        <p class="video-description">YGG Onchain Guild is here! 🚀 Uniting gamers with shared goals and unlocking endless opportunities.</p>
+                        <div class="tiktok-badge" onclick="window.open('https://www.tiktok.com/@judylovedygg/video/7448359785747074312', '_blank')" style="cursor: pointer;">🎵 Watch on TikTok</div>
+                    </div>
+                </div>
+
+                <!-- Video Card 12 -->
+                <div class="video-card">
+                    <div class="video-preview">
+                        <iframe src="https://www.tiktok.com/embed/v2/7538250904567368967" allow="encrypted-media" allowfullscreen></iframe>
+                        <div class="play-overlay"></div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Ragnarök Libre 2.0</h3>
+                        <p class="video-description">🎮 Libre ka na talaga maglaro! 🗡️🔥 From class selection to epic boss fights — Ragnarok Libre brings the classic RO vibes!</p>
+                        <div class="tiktok-badge" onclick="window.open('https://www.tiktok.com/@judylovedygg/video/7538250904567368967', '_blank')" style="cursor: pointer;">🎵 Watch on TikTok</div>
+                    </div>
+                </div>
+
+                <!-- Video Card 13 -->
+                <div class="video-card">
+                    <div class="video-preview">
+                        <iframe src="https://www.tiktok.com/embed/v2/7450065907503598866" allow="encrypted-media" allowfullscreen></iframe>
+                        <div class="play-overlay"></div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">YGG GAP S8 Doable Quests</h3>
+                        <p class="video-description">🎮 Ready to conquer GAP S8 Doable Quests in just a week? I've found 4 exciting games with 11 quests you can easily complete!</p>
+                        <div class="tiktok-badge" onclick="window.open('https://www.tiktok.com/@judylovedygg/video/7450065907503598866', '_blank')" style="cursor: pointer;">🎵 Watch on TikTok</div>
+                    </div>
+                </div>
+
+                <!-- Video Card 14 -->
+                <div class="video-card">
+                    <div class="video-preview">
+                        <iframe src="https://www.tiktok.com/embed/v2/7450659720953744647" allow="encrypted-media" allowfullscreen></iframe>
+                        <div class="play-overlay"></div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Parallel TCG Valkyrie Prime</h3>
+                        <p class="video-description">Meet the incredible female lineup of YGG in @ParallelTCG: The Valkyrie Prime! This powerhouse team is set to dominate the game!</p>
+                        <div class="tiktok-badge" onclick="window.open('https://www.tiktok.com/@judylovedygg/video/7450659720953744647', '_blank')" style="cursor: pointer;">🎵 Watch on TikTok</div>
+                    </div>
+                </div>
+
+                <!-- Video Card 15 -->
+                <div class="video-card">
+                    <div class="video-preview">
+                        <iframe src="https://www.tiktok.com/embed/v2/7423880013088427272" allow="encrypted-media" allowfullscreen></iframe>
+                        <div class="play-overlay"></div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">YGG Play Summit 2024 Parallel TCG Tournament</h3>
+                        <p class="video-description">Get ready to battle in the biggest web3 TCG, Parallel! 🎮💥 Don't miss out – register now and be the next esports champion! 🔥</p>
+                        <div class="tiktok-badge" onclick="window.open('https://www.tiktok.com/@judylovedygg/video/7423880013088427272', '_blank')" style="cursor: pointer;">🎵 Watch on TikTok</div>
+                    </div>
+                </div>
+
+                <!-- Video Card 16 -->
+                <div class="video-card">
+                    <div class="video-preview">
+                        <iframe src="https://www.tiktok.com/embed/v2/7421493351251184914" allow="encrypted-media" allowfullscreen></iframe>
+                        <div class="play-overlay"></div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">YGG Play Summit 2024 Arena of Faith Tournament</h3>
+                        <p class="video-description">Join the Arena of Faith YGG Play Summit Showdown with a 10K USD prize pool! 🏆 Don't miss your chance to compete LIVE!</p>
+                        <div class="tiktok-badge" onclick="window.open('https://www.tiktok.com/@judylovedygg/video/7421493351251184914', '_blank')" style="cursor: pointer;">🎵 Watch on TikTok</div>
+                    </div>
+                </div>
+
+                <!-- Video Card 17 -->
+                <div class="video-card">
+                    <div class="video-preview">
+                        <iframe src="https://www.tiktok.com/embed/v2/7553027595298770184" allow="encrypted-media" allowfullscreen></iframe>
+                        <div class="play-overlay"></div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">the9bit</h3>
+                        <p class="video-description">Let's go play the9bit! So nostalgic and cool!</p>
+                        <div class="tiktok-badge" onclick="window.open('https://www.tiktok.com/@judylovedygg/video/7553027595298770184', '_blank')" style="cursor: pointer;">🎵 Watch on TikTok</div>
+                    </div>
+                </div>
+
+                <!-- Video Card 18 -->
+                <div class="video-card">
+                    <div class="video-preview">
+                        <iframe src="https://www.tiktok.com/embed/v2/7557252763948797192" allow="encrypted-media" allowfullscreen></iframe>
+                        <div class="play-overlay"></div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">YGG Play LOL Land</h3>
+                        <p class="video-description">🎲Rolled into LOL Land with the fam at Legion's Game Night — and it was a blast! 🐧</p>
+                        <div class="tiktok-badge" onclick="window.open('https://www.tiktok.com/@judylovedygg/video/7557252763948797192', '_blank')" style="cursor: pointer;">🎵 Watch on TikTok</div>
+                    </div>
+                </div>
+
+                <!-- Video Card 19 -->
+                <div class="video-card">
+                    <div class="video-preview">
+                        <iframe src="https://www.tiktok.com/embed/v2/7451773363481070856" allow="encrypted-media" allowfullscreen></iframe>
+                        <div class="play-overlay"></div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">G!G Rewards</h3>
+                        <p class="video-description">🎉 Ready to earn Telco rewards with GIG? Here's your quick guide to get started and win exciting rewards just by completing fun quests! 🌟</p>
+                        <div class="tiktok-badge" onclick="window.open('https://www.tiktok.com/@judylovedygg/video/7451773363481070856', '_blank')" style="cursor: pointer;">🎵 Watch on TikTok</div>
+                    </div>
+                </div>
+
+                <!-- Video Card 20 -->
+                <div class="video-card">
+                    <div class="video-preview">
+                        <iframe src="https://www.tiktok.com/embed/v2/7451443501725650184" allow="encrypted-media" allowfullscreen></iframe>
+                        <div class="play-overlay"></div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">YGG Play Summit 2024 @ABS-CBN</h3>
+                        <p class="video-description">🎮 The future of gaming is here! 🚀 At the YGG Play Summit 2024, John Sedano shared how YGG is transforming gaming with blockchain, NFTs, and crypto. 💡</p>
+                        <div class="tiktok-badge" onclick="window.open('https://www.tiktok.com/@judylovedygg/video/7451443501725650184', '_blank')" style="cursor: pointer;">🎵 Watch on TikTok</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Judy Lou Cortes. All rights reserved. | Designed with 💜</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
