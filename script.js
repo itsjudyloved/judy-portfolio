@@ -56,6 +56,40 @@ window.addEventListener('scroll', () => {
 const filterButtons = document.querySelectorAll('.filter-btn');
 const portfolioItems = document.querySelectorAll('.portfolio-item');
 
+function updatePortfolioGridColumns() {
+    const portfolioGrid = document.querySelector('.portfolio-grid');
+    if (!portfolioGrid || !portfolioItems.length) return;
+
+    // Count currently visible items (works with filtering via display: none)
+    const visibleCount = Array.from(portfolioItems).filter(item => {
+        return item.style.display !== 'none';
+    }).length;
+
+    // Requirement: fewer than 3 cards => 2 columns; 3+ cards => 3 columns
+    portfolioGrid.classList.toggle('cols-2', visibleCount < 3);
+    portfolioGrid.classList.toggle('cols-3', visibleCount >= 3);
+}
+
+function applyPortfolioFilter(filterValue) {
+    if (!filterButtons.length || !portfolioItems.length) return;
+
+    filterButtons.forEach(btn => {
+        const btnFilter = btn.getAttribute('data-filter');
+        btn.classList.toggle('active', btnFilter === filterValue);
+    });
+
+    portfolioItems.forEach(item => {
+        if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+            item.style.display = 'block';
+            item.style.animation = 'fadeInUp 0.5s ease';
+        } else {
+            item.style.display = 'none';
+        }
+    });
+
+    updatePortfolioGridColumns();
+}
+
 filterButtons.forEach(button => {
     button.addEventListener('click', () => {
         // Remove active class from all buttons
@@ -64,15 +98,8 @@ filterButtons.forEach(button => {
         button.classList.add('active');
         
         const filterValue = button.getAttribute('data-filter');
-        
-        portfolioItems.forEach(item => {
-            if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
-                item.style.display = 'block';
-                item.style.animation = 'fadeInUp 0.5s ease';
-            } else {
-                item.style.display = 'none';
-            }
-        });
+
+        applyPortfolioFilter(filterValue);
     });
 });
 
@@ -276,6 +303,25 @@ function setActiveNavOnLoad() {
 // Run on load so the correct menu item is highlighted immediately
 setActiveNavOnLoad();
 
+// If we land on a deep-link anchor in the Portfolio page, ensure the correct filter is applied
+// and scroll smoothly with navbar offset.
+document.addEventListener('DOMContentLoaded', () => {
+    if (!window.location.hash) return;
+
+    const rawHash = window.location.hash;
+    const hash = rawHash.startsWith('#') ? rawHash.slice(1) : rawHash;
+
+    if (hash === 'content-creation') {
+        applyPortfolioFilter('content');
+    }
+
+    const target = document.getElementById(hash);
+    if (target) {
+        const offsetTop = target.offsetTop - 80;
+        window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+    }
+});
+
 // ===== Add active state styles for nav links =====
 const navLinkStyle = document.createElement('style');
 navLinkStyle.textContent = `
@@ -323,6 +369,8 @@ const typeWriter = (element, text, speed = 100) => {
 
 // ===== Initialize on Page Load =====
 document.addEventListener('DOMContentLoaded', () => {
+    updatePortfolioGridColumns();
+
     // Add fade-in animation to hero content
     const heroContent = document.querySelector('.hero-content');
     if (heroContent) {
