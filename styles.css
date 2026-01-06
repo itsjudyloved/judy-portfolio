@@ -52,6 +52,11 @@ body {
     flex: 1 0 auto;
 }
 
+/* Let the content creation page section grow to fill available space */
+.content-creation-page {
+    flex: 1 0 auto;
+}
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
