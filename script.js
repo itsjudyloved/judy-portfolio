@@ -15,6 +15,37 @@ document.querySelectorAll('.nav-link').forEach(link => {
     });
 });
 
+// Smooth scroll for navbar links that include a hash (e.g. index.html#contact)
+// This keeps the site behaving like a single-page scroll experience on index.html.
+document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', function (e) {
+        const href = this.getAttribute('href') || '';
+        if (!href.includes('#')) return;
+
+        const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+        // Only intercept hash navigation when we're already on index.html
+        if (currentPath !== 'index.html') return;
+
+        const hashPart = href.slice(href.indexOf('#'));
+        if (!hashPart || hashPart === '#') return;
+
+        const target = document.querySelector(hashPart);
+        if (!target) return;
+
+        e.preventDefault();
+        const offsetTop = target.offsetTop - 80;
+        window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+
+        // Immediately reflect active state on click
+        try {
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            this.classList.add('active');
+        } catch (err) {
+            // ignore
+        }
+    });
+});
+
 // ===== Smooth Scrolling for Navigation Links =====
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
@@ -31,7 +62,9 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         // Immediately set the nav link active when an in-page anchor is clicked
         try {
             const href = this.getAttribute('href');
-            const navToActivate = document.querySelector(`.nav-link[href="${href}"]`);
+            const navToActivate = Array.from(document.querySelectorAll('.nav-link')).find(l => {
+                return normalizeToHash(l.getAttribute('href')) === href;
+            });
             if (navToActivate) {
                 document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
                 navToActivate.classList.add('active');
@@ -155,7 +188,7 @@ fadeElements.forEach(element => {
 // ===== Contact Form Handling =====
 const contactForm = document.querySelector('.contact-form');
 
-if (contactForm) {
+if (contactForm && contactForm.id !== 'contact-form-emailjs') {
     contactForm.addEventListener('submit', (e) => {
         e.preventDefault();
         
@@ -251,6 +284,13 @@ document.head.appendChild(style);
 const sections = document.querySelectorAll('section[id]');
 const navLinks = document.querySelectorAll('.nav-link');
 
+function normalizeToHash(href) {
+    if (!href) return '';
+    const hashIndex = href.indexOf('#');
+    if (hashIndex === -1) return '';
+    return href.slice(hashIndex);
+}
+
 const highlightActiveSection = () => {
     const scrollY = window.pageYOffset;
     
@@ -262,7 +302,8 @@ const highlightActiveSection = () => {
         if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
             navLinks.forEach(link => {
                 link.classList.remove('active');
-                if (link.getAttribute('href') === `#${sectionId}`) {
+                const linkHash = normalizeToHash(link.getAttribute('href'));
+                if (linkHash === `#${sectionId}`) {
                     link.classList.add('active');
                 }
             });
@@ -270,15 +311,19 @@ const highlightActiveSection = () => {
     });
 };
 
-// Do not change active nav on scroll; keep active state persistent until user clicks another link
-// window.addEventListener('scroll', highlightActiveSection);
+// Update active nav link based on the section currently in view (scrollspy)
+if (sections.length && navLinks.length) {
+    window.addEventListener('scroll', highlightActiveSection);
+}
 
 // Set active nav item on initial load based on current page or hash
 function setActiveNavOnLoad() {
     const currentPath = window.location.pathname.split('/').pop() || 'index.html';
     // First, try to activate by hash if present
     if (window.location.hash) {
-        const byHash = document.querySelector(`.nav-link[href="${window.location.hash}"]`);
+        const byHash = Array.from(document.querySelectorAll('.nav-link')).find(l => {
+            return normalizeToHash(l.getAttribute('href')) === window.location.hash;
+        });
         if (byHash) {
             document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
             byHash.classList.add('active');
@@ -293,7 +338,7 @@ function setActiveNavOnLoad() {
         if (!href) return;
         // skip anchors (handled above)
         if (href.startsWith('#')) return;
-        const linkFile = href.split('/').pop();
+        const linkFile = href.split('/').pop().split('#')[0];
         if (linkFile === currentPath || (currentPath === '' && (linkFile === 'index.html' || href === '/'))) {
             link.classList.add('active');
         }
@@ -302,6 +347,13 @@ function setActiveNavOnLoad() {
 
 // Run on load so the correct menu item is highlighted immediately
 setActiveNavOnLoad();
+
+// Also run once after initial paint so the correct section is highlighted if the page loads mid-scroll
+if ((window.location.pathname.split('/').pop() || 'index.html') === 'index.html') {
+    window.addEventListener('load', () => {
+        try { highlightActiveSection(); } catch (e) { /* ignore */ }
+    });
+}
 
 // If we land on a deep-link anchor in the Portfolio page, ensure the correct filter is applied
 // and scroll smoothly with navbar offset.
@@ -369,6 +421,21 @@ const typeWriter = (element, text, speed = 100) => {
 
 // ===== Initialize on Page Load =====
 document.addEventListener('DOMContentLoaded', () => {
+    // Global bubble background layer (applies to all pages)
+    if (!document.querySelector('.global-bubbles')) {
+        const bubbles = document.createElement('div');
+        bubbles.className = 'global-bubbles';
+        bubbles.setAttribute('aria-hidden', 'true');
+
+        for (let i = 1; i <= 4; i++) {
+            const bubble = document.createElement('div');
+            bubble.className = `global-bubble bubble-${i}`;
+            bubbles.appendChild(bubble);
+        }
+
+        document.body.insertBefore(bubbles, document.body.firstChild);
+    }
+
     updatePortfolioGridColumns();
 
     // Add fade-in animation to hero content

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio</title>
     <link rel="icon" href="logos/solo.png" type="image/png">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=20260106">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -24,7 +24,7 @@
                     </a>
             </div>
             <ul class="nav-menu">
-                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="index.html#home" class="nav-link">Home</a></li>
                 <li><a href="about.html" class="nav-link">About</a></li>
                 <li><a href="portfolio.html" class="nav-link">Portfolio</a></li>
                 <li><a href="skills.html" class="nav-link">Skills</a></li>
@@ -61,13 +61,17 @@
             <h2 class="section-title">Get In Touch</h2>
             <p class="section-subtitle">Let's collaborate on your next project</p>
 
+            <div class="contact-cta">
+                <a class="btn btn-primary" href="https://mail.google.com/mail/u/0/?fs=1&to=judyloucortes@gmail.com&su=Inquiry+About+Collaboration+/+Project&tf=cm" target="_blank" rel="noopener">Message Me</a>
+            </div>
+
             <div class="contact-content">
                 <div class="contact-info">
                     <div class="contact-item">
                         <div class="contact-icon">📧</div>
                         <div class="contact-details">
                             <h3>Email</h3>
-                            <a href="mailto:judyloucortes@gmail.com">judyloucortes@gmail.com</a>
+                            <span class="contact-email-text">judyloucortes@gmail.com</span>
                         </div>
                     </div>
                     <div class="contact-item">
@@ -95,23 +99,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- EmailJS-powered contact form (replaces previous static form) -->
-                <form id="contact-form-emailjs" class="contact-form contact-form--emailjs" novalidate>
-                    <div class="form-group">
-                        <input id="cj-name" name="from_name" type="text" placeholder="Your Name" required>
-                    </div>
-                    <div class="form-group">
-                        <input id="cj-email" name="from_email" type="email" placeholder="Your Email" required>
-                    </div>
-                    <div class="form-group">
-                        <textarea id="cj-message" name="message" rows="5" placeholder="Your Message" required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <button id="cj-send" type="submit" class="btn btn-primary">Send Message</button>
-                    </div>
-                    <div id="cj-feedback" class="cj-feedback" aria-live="polite" style="margin-top:8px; font-weight:600;"></div>
-                </form>
             </div>
         </div>
     </section>
@@ -123,75 +110,7 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
-    <!-- EmailJS SDK and form handler -->
-    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-    <script>
-        (function(){
-            if (typeof emailjs !== 'undefined') {
-                emailjs.init('oy12SfYxcrp5RoRpP');
-            } else {
-                console.warn('EmailJS SDK not loaded');
-            }
-
-            const form = document.getElementById('contact-form-emailjs');
-            const sendBtn = document.getElementById('cj-send');
-            const feedback = document.getElementById('cj-feedback');
-            let sending = false;
-
-            function showFeedback(type, text) {
-                feedback.className = 'cj-feedback ' + (type === 'success' ? 'cj-success' : 'cj-error');
-                feedback.textContent = text;
-            }
-
-            function validate() {
-                const name = document.getElementById('cj-name').value.trim();
-                const email = document.getElementById('cj-email').value.trim();
-                const msg = document.getElementById('cj-message').value.trim();
-                if (!name || !email || !msg) return false;
-                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                return re.test(email);
-            }
-
-            if (form) {
-                form.addEventListener('submit', function(e){
-                    e.preventDefault();
-                    if (sending) return;
-                    feedback.className = 'cj-feedback'; feedback.textContent = '';
-                    if (!validate()) { showFeedback('error', 'Please complete all fields with a valid email.'); return; }
-
-                    const name = document.getElementById('cj-name').value.trim();
-                    const email = document.getElementById('cj-email').value.trim();
-                    const message = document.getElementById('cj-message').value.trim();
-
-                    sending = true; sendBtn.disabled = true; const oldText = sendBtn.textContent; sendBtn.textContent = 'Sending...';
-
-                    const templateParams = {
-                        from_name: name,
-                        from_email: email,
-                        message: message,
-                        to_email: 'judyloucortes@gmail.com'
-                    };
-
-                    emailjs.send('judyloved', 'template_m0z4b88', templateParams)
-                        .then(function(response){
-                            showFeedback('success', 'Message sent successfully, Judy! ✅');
-                            form.reset();
-                        }, function(err){
-                            console.error('EmailJS error', err);
-                            showFeedback('error', 'Failed to send message. Please try again later.');
-                        })
-                        .finally(function(){ sending = false; sendBtn.disabled = false; sendBtn.textContent = oldText; });
-                });
-
-                // Clear feedback on input
-                ['cj-name','cj-email','cj-message'].forEach(id => {
-                    const el = document.getElementById(id);
-                    if (!el) return; el.addEventListener('input', () => { feedback.className = 'cj-feedback'; feedback.textContent = ''; });
-                });
-            }
-        })();
-    </script>
+    <script src="script.js?v=20260106"></script>
 </body>
 
 </html>
