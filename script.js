@@ -22,9 +22,23 @@ document.querySelectorAll('.nav-link').forEach(link => {
         const href = this.getAttribute('href') || '';
         if (!href.includes('#')) return;
 
-        const currentPath = window.location.pathname.split('/').pop() || 'index.html';
-        // Only intercept hash navigation when we're already on index.html
-        if (currentPath !== 'index.html') return;
+        function isHomePagePath(pathname) {
+            // Supports:
+            // - /judy-portfolio/
+            // - /judy-portfolio/index.html
+            // - / (local)
+            // - /index.html
+            const clean = (pathname || '').replace(/\/+/g, '/');
+            if (clean === '/' || clean === '') return true;
+            if (clean.endsWith('/')) {
+                const parts = clean.split('/').filter(Boolean);
+                return parts.length === 0 || (parts.length === 1 && parts[0] === 'judy-portfolio');
+            }
+            return clean.endsWith('/index.html') || clean.endsWith('index.html');
+        }
+
+        // Only intercept hash navigation when we're already on the home page
+        if (!isHomePagePath(window.location.pathname)) return;
 
         const hashPart = href.slice(href.indexOf('#'));
         if (!hashPart || hashPart === '#') return;
@@ -318,7 +332,38 @@ if (sections.length && navLinks.length) {
 
 // Set active nav item on initial load based on current page or hash
 function setActiveNavOnLoad() {
-    const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+    const currentPath = window.location.pathname || '/';
+
+    function getPageKeyFromPath(pathname) {
+        // Returns: 'home', 'about', 'portfolio', 'skills', etc.
+        const clean = (pathname || '').replace(/\/+/g, '/');
+        const parts = clean.split('/').filter(Boolean);
+
+        // GitHub Pages project site: /judy-portfolio/<page>/
+        const startIndex = (parts[0] === 'judy-portfolio') ? 1 : 0;
+        const page = parts[startIndex] || '';
+
+        if (!page || page === 'index.html') return 'home';
+        if (page.endsWith('.html')) return page.replace(/\.html$/i, '');
+        return page;
+    }
+
+    function getPageKeyFromHref(href) {
+        if (!href) return '';
+        if (href.startsWith('#')) return 'home';
+        const withoutHash = href.split('#')[0];
+        // allow absolute and relative hrefs
+        const fakeBase = window.location.origin + (window.location.pathname.startsWith('/judy-portfolio') ? '/judy-portfolio/' : '/');
+        let url;
+        try {
+            url = new URL(withoutHash, fakeBase);
+        } catch (e) {
+            return '';
+        }
+        return getPageKeyFromPath(url.pathname);
+    }
+
+    const currentKey = getPageKeyFromPath(currentPath);
     // First, try to activate by hash if present
     if (window.location.hash) {
         const byHash = Array.from(document.querySelectorAll('.nav-link')).find(l => {
@@ -338,10 +383,9 @@ function setActiveNavOnLoad() {
         if (!href) return;
         // skip anchors (handled above)
         if (href.startsWith('#')) return;
-        const linkFile = href.split('/').pop().split('#')[0];
-        if (linkFile === currentPath || (currentPath === '' && (linkFile === 'index.html' || href === '/'))) {
-            link.classList.add('active');
-        }
+
+        const linkKey = getPageKeyFromHref(href);
+        if (linkKey && linkKey === currentKey) link.classList.add('active');
     });
 }
 
@@ -349,7 +393,7 @@ function setActiveNavOnLoad() {
 setActiveNavOnLoad();
 
 // Also run once after initial paint so the correct section is highlighted if the page loads mid-scroll
-if ((window.location.pathname.split('/').pop() || 'index.html') === 'index.html') {
+if ((window.location.pathname || '').endsWith('/index.html') || (window.location.pathname || '').endsWith('index.html') || (window.location.pathname || '').endsWith('/judy-portfolio/') || (window.location.pathname || '') === '/' || (window.location.pathname || '') === '') {
     window.addEventListener('load', () => {
         try { highlightActiveSection(); } catch (e) { /* ignore */ }
     });
